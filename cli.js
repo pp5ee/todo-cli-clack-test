@@ -1,6 +1,19 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk');
+let chalk;
+try {
+  chalk = require('chalk');
+} catch (e) {
+  chalk = {
+    cyan: s => s,
+    gray: s => s,
+    green: s => s,
+    yellow: s => s,
+    red: s => s,
+    white: s => s,
+    bold: s => s
+  };
+}
 const { addTask, listTasks, completeTask, deleteTask, getTask } = require('./index');
 
 function showHelp() {
@@ -120,7 +133,6 @@ function main() {
     case 'list':
       cmdList();
       break;
-    case 'complete':
     case 'complete':
       cmdComplete(commandArgs);
       break;
